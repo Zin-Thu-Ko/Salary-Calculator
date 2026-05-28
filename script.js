@@ -1,0 +1,172 @@
+function calculateSalary(){
+
+  // Basic Data
+  let workingDays =
+    Number(document.getElementById("workingDays").value);
+
+  let shift =
+    document.getElementById("shift").value;
+
+  // OT Inputs
+  let phOT =
+    Number(document.getElementById("phOT").value);
+
+  let phExtraOT =
+    Number(document.getElementById("phExtraOT").value);
+
+  let offOT =
+    Number(document.getElementById("offOT").value);
+
+  let offExtraOT =
+    Number(document.getElementById("offExtraOT").value);
+
+  let normalOT =
+    Number(document.getElementById("normalOT").value);
+
+  // Absent
+  let absent1 =
+    Number(document.getElementById("absent1").value);
+
+  let absent2 =
+    Number(document.getElementById("absent2").value);
+
+  // Bonus
+  let kpi =
+    Number(document.getElementById("kpi").value);
+
+  let otherBonus =
+    Number(document.getElementById("otherBonus").value);
+
+
+
+  // ======================
+  // BASIC SALARY
+  // ======================
+
+  let basicSalary = workingDays * 376;
+
+
+
+  // ======================
+  // OT CALCULATION
+  // ======================
+
+  let hourlyRate = 376 / 8;
+
+  // Public Holiday
+  let publicHolidayPay =
+    (phOT * hourlyRate * 1) +
+    (phExtraOT * hourlyRate * 3);
+
+  // Off Day
+  let offDayPay =
+    (offOT * hourlyRate * 2) +
+    (offExtraOT * hourlyRate * 3);
+
+  // Normal OT
+  let normalOTPay =
+    normalOT * hourlyRate * 1.5;
+
+
+
+  // ======================
+  // SHIFT BONUS
+  // ======================
+
+  let totalOTHours =
+    phOT +
+    phExtraOT +
+    offOT +
+    offExtraOT +
+    normalOT;
+  let nightBonus =
+    phOT +
+    phExtraOT +
+    offOT +
+    offExtraOT ;
+
+  let shiftBonus = 0;
+
+  if(shift === "day"){
+    shiftBonus = totalOTHours * 7;
+  }else{
+    shiftBonus = nightBonus * 15 + workingDays * 150;
+  }
+
+
+
+  // ======================
+  // ATTENDANCE BONUS
+  // ======================
+
+  let attendanceBonus = 1000;
+
+  if(absent1 > 0){
+    attendanceBonus -= 500;
+  }
+
+  if(absent2 > 0){
+    attendanceBonus -= 500;
+  }
+
+
+
+  // ======================
+  // TAX
+  // ======================
+
+  let tax = basicSalary * 0.05;
+
+
+
+  // ======================
+  // TOTAL SALARY
+  // ======================
+
+  let totalSalary =
+    basicSalary +
+    publicHolidayPay +
+    offDayPay +
+    normalOTPay +
+    shiftBonus +
+    attendanceBonus +
+    kpi +
+    otherBonus -
+    tax;
+
+
+
+  // ======================
+  // SHOW RESULT
+  // ======================
+
+  document.getElementById("result").innerHTML = `
+  
+    <h2>Salary Result</h2>
+
+    <p>Basic Salary: ${basicSalary.toFixed(2)} Baht</p>
+
+    <p>Public Holiday OT: ${publicHolidayPay.toFixed(2)} Baht</p>
+
+    <p>Off Day OT: ${offDayPay.toFixed(2)} Baht</p>
+
+    <p>Normal OT: ${normalOTPay.toFixed(2)} Baht</p>
+
+    <p>Shift Bonus: ${shiftBonus.toFixed(2)} Baht</p>
+
+    <p>Attendance Bonus: ${attendanceBonus.toFixed(2)} Baht</p>
+
+    <p>KPI Bonus: ${kpi.toFixed(2)} Baht</p>
+
+    <p>Other Bonus: ${otherBonus.toFixed(2)} Baht</p>
+
+    <p>Tax: -${tax.toFixed(2)} Baht</p>
+
+    <hr>
+
+    <h2>Total Salary:
+      ${totalSalary.toFixed(2)} Baht
+    </h2>
+
+  `;
+}
