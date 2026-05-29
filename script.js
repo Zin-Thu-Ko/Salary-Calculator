@@ -1,6 +1,8 @@
 function calculateSalary(){
 
   // Basic Data
+  let dailyWage = 
+    Number(document.getElementById("dailyWage").value);
   let workingDays =
     Number(document.getElementById("workingDays").value);
 
@@ -43,7 +45,7 @@ function calculateSalary(){
   // BASIC SALARY
   // ======================
 
-  let basicSalary = workingDays * 376;
+  let basicSalary = workingDays * dailyWage;
 
 
 
@@ -51,7 +53,7 @@ function calculateSalary(){
   // OT CALCULATION
   // ======================
 
-  let hourlyRate = 376 / 8;
+  let hourlyRate = dailyWage / 8;
 
   // Public Holiday
   let publicHolidayPay =
