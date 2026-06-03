@@ -15,19 +15,18 @@
 
     <h1>Salary Calculator</h1>
 
-    <!-- Working Days -->
-    <label> Daily Wage</label>
+    <label>Daily Wage</label>
     <input type="number" id="dailyWage">
-    
+    <!-- Working Days -->
     <label>Total Working Days</label>
     <input type="number" id="workingDays">
 
     <!-- Shift -->
-    <label>Shift Type</label>
-    <select id="shift">
-      <option value="day">Day Shift</option>
-      <option value="night">Night Shift</option>
-    </select>
+    <label>Total Days at Day Shift</label>
+    <input type="number" id="dayShift">
+
+    <label>Total Days at Night Shift</label>
+    <input type="number" id="nightShift">
 
     <!-- Public Holiday OT -->
     <label>Public Holiday OT Hours</label>
@@ -64,8 +63,10 @@
     <label>Other Bonus</label>
     <input type="number" id="otherBonus">
 
+    <label>Electricity Bill</label>
+    <input type="number" id="eBill">
     <!-- Button -->
-    <button onclick="calculateSalary()">
+    <button type="button" onclick="calculateSalary()">
       Calculate Salary
     </button>
 
