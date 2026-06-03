@@ -1,14 +1,17 @@
 function calculateSalary(){
 
   // Basic Data
-  let dailyWage = 
-    Number(document.getElementById("dailyWage").value);
+  let dailyWage =
+    Number(document.getElementById("dailyWage"). value);
   let workingDays =
     Number(document.getElementById("workingDays").value);
 
-  let shift =
-    document.getElementById("shift").value;
+  let dayShift =
+    Number(document.getElementById("dayShift").value);
 
+  let nightShift =
+    Number(document.getElementById("nightShift").value);
+    
   // OT Inputs
   let phOT =
     Number(document.getElementById("phOT").value);
@@ -39,6 +42,9 @@ function calculateSalary(){
   let otherBonus =
     Number(document.getElementById("otherBonus").value);
 
+  let eBill =
+    Number(document.getElementById("eBill").value);
+
 
 
   // ======================
@@ -48,7 +54,9 @@ function calculateSalary(){
   let basicSalary = workingDays * dailyWage;
 
 
+  let dayshiftBonus = dayShift * 14;
 
+  let nightshiftBonus = nightShift * 150;
   // ======================
   // OT CALCULATION
   // ======================
@@ -70,30 +78,6 @@ function calculateSalary(){
     normalOT * hourlyRate * 1.5;
 
 
-
-  // ======================
-  // SHIFT BONUS
-  // ======================
-
-  let totalOTHours =
-    phOT +
-    phExtraOT +
-    offOT +
-    offExtraOT +
-    normalOT;
-  let nightBonus =
-    phOT +
-    phExtraOT +
-    offOT +
-    offExtraOT ;
-
-  let shiftBonus = 0;
-
-  if(shift === "day"){
-    shiftBonus = totalOTHours * 7;
-  }else{
-    shiftBonus = nightBonus * 15 + workingDays * 150;
-  }
 
 
 
@@ -130,11 +114,13 @@ function calculateSalary(){
     publicHolidayPay +
     offDayPay +
     normalOTPay +
-    shiftBonus +
+    dayshiftBonus +
+    nightshiftBonus +
     attendanceBonus +
     kpi +
     otherBonus -
-    tax;
+    (tax +
+    eBill);
 
 
 
@@ -154,7 +140,9 @@ function calculateSalary(){
 
     <p>Normal OT: ${normalOTPay.toFixed(2)} Baht</p>
 
-    <p>Shift Bonus: ${shiftBonus.toFixed(2)} Baht</p>
+    <p>Day Shift Bonus: ${dayshiftBonus.toFixed(2)} Baht</p>
+
+    <p>Night Shift Bonus: ${nightshiftBonus.toFixed(2)}Baht</p>
 
     <p>Attendance Bonus: ${attendanceBonus.toFixed(2)} Baht</p>
 
@@ -164,8 +152,8 @@ function calculateSalary(){
 
     <p>Tax: -${tax.toFixed(2)} Baht</p>
 
-    <hr>
-
+    <p>Electricity Bill: -${eBill.toFixed(2)} Baht</p>
+    
     <h2>Total Salary:
       ${totalSalary.toFixed(2)} Baht
     </h2>
