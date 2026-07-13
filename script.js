@@ -6,11 +6,8 @@ function calculateSalary(){
   let workingDays =
     Number(document.getElementById("workingDays").value);
 
-  let dayShift =
-    Number(document.getElementById("dayShift").value);
-
-  let nightShift =
-    Number(document.getElementById("nightShift").value);
+  let shift =
+    document.getElementById("shift").value;
     
   // OT Inputs
   let phOT =
@@ -53,10 +50,6 @@ function calculateSalary(){
 
   let basicSalary = workingDays * dailyWage;
 
-
-  let dayshiftBonus = dayShift * 14;
-
-  let nightshiftBonus = nightShift * 150;
   // ======================
   // OT CALCULATION
   // ======================
@@ -78,7 +71,25 @@ function calculateSalary(){
     normalOT * hourlyRate * 1.5;
 
 
+  let totalOTHours =
+    phOT +
+    phExtraOT +
+    offOT +
+    offExtraOT +
+    normalOT;
+  let nightBonus =
+    phOT +
+    phExtraOT +
+    offOT +
+    offExtraOT ;
 
+  let shiftBonus = 0;
+
+  if(shift === "day"){
+    shiftBonus = totalOTHours * 7;
+  }else{
+    shiftBonus = nightBonus * 15 + workingDays * 150;
+  }
 
 
   // ======================
@@ -114,8 +125,7 @@ function calculateSalary(){
     publicHolidayPay +
     offDayPay +
     normalOTPay +
-    dayshiftBonus +
-    nightshiftBonus +
+    shiftBonus +
     attendanceBonus +
     kpi +
     otherBonus -
