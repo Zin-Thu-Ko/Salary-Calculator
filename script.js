@@ -150,9 +150,7 @@ function calculateSalary(){
 
     <p>Normal OT: ${normalOTPay.toFixed(2)} Baht</p>
 
-    <p>Day Shift Bonus: ${dayshiftBonus.toFixed(2)} Baht</p>
-
-    <p>Night Shift Bonus: ${nightshiftBonus.toFixed(2)}Baht</p>
+    <p>Shift Bonus: ${shiftBonus.toFixed(2)} Baht</p>
 
     <p>Attendance Bonus: ${attendanceBonus.toFixed(2)} Baht</p>
 
