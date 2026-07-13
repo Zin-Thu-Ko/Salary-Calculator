@@ -6,8 +6,11 @@ function calculateSalary(){
   let workingDays =
     Number(document.getElementById("workingDays").value);
 
-  let shift =
-    document.getElementById("shift").value;
+  let dayShift =
+    Number(document.getElementById("dayShift").value);
+
+  let nightShift =
+    Number(document.getElementById("nightShift").value);
     
   // OT Inputs
   let phOT =
@@ -70,27 +73,9 @@ function calculateSalary(){
   let normalOTPay =
     normalOT * hourlyRate * 1.5;
 
+let dayshiftBonus = dayShift * 14;
 
-  let totalOTHours =
-    phOT +
-    phExtraOT +
-    offOT +
-    offExtraOT +
-    normalOT;
-  let nightBonus =
-    phOT +
-    phExtraOT +
-    offOT +
-    offExtraOT ;
-
-  let shiftBonus = 0;
-
-  if(shift === "day"){
-    shiftBonus = totalOTHours * 7;
-  }else{
-    shiftBonus = nightBonus * 15 + workingDays * 150;
-  }
-
+  let nightshiftBonus = nightShift * 150;
 
   // ======================
   // ATTENDANCE BONUS
@@ -125,7 +110,8 @@ function calculateSalary(){
     publicHolidayPay +
     offDayPay +
     normalOTPay +
-    shiftBonus +
+    dayshiftBonus +
+    nightshiftBonus+
     attendanceBonus +
     kpi +
     otherBonus -
@@ -150,8 +136,10 @@ function calculateSalary(){
 
     <p>Normal OT: ${normalOTPay.toFixed(2)} Baht</p>
 
-    <p>Shift Bonus: ${shiftBonus.toFixed(2)} Baht</p>
+    <p>Day Shift Bonus: ${dayshiftBonus.toFixed(2)} Baht</p>
 
+    <p>Night Shift Bonus: ${nightshiftBonus.toFixed(2)}Baht</p>
+    
     <p>Attendance Bonus: ${attendanceBonus.toFixed(2)} Baht</p>
 
     <p>KPI Bonus: ${kpi.toFixed(2)} Baht</p>
